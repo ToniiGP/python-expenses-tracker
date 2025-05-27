@@ -1,6 +1,7 @@
-import re
+import re #importing regular expressions module 
 
 #Defining Functions 
+
 #creating function that creates the expenses 'board' 
 def expenses_board(): 
     expenses = [] #creating list to save the expenses 
@@ -37,10 +38,11 @@ def monthly_expenses(expenses):
         "09": "September", "10": "October", "11": "November", "12": "December"
     }
     
+    #accesing needed information with a for loop 
     for g in expenses: 
-        match = re.search(r"\d{4}-(\d{2})-\d{2}", g["Date: "])
+        match = re.search(r"\d{4}-(\d{2})-\d{2}", g["Date: "]) #created a regular expression to get the month of the expense from the date
         if match:
-            month_number = match.group(1)
+            month_number = match.group(1)    #adding the expense to it's month in 
             month = month_names.get(month_number, "Unknown")
             
             if month not in  monthly_groups:
@@ -78,10 +80,6 @@ def monthly_expenses(expenses):
     print("=" * 20)
             
         
-
-
-
-
 #Main Program 
 print("Welcome to Expenses Tracker")
 all_expenses = expenses_board()
