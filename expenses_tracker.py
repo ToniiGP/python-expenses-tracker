@@ -7,11 +7,42 @@ def expenses_board():
     expenses = [] #creating list to save the expenses 
     while True:  #using a loop to store multiple data 
          print("----------------------------------------")
+         
         #getting input from the user
-         category = input("Please Insert the expense category: ") 
-         amount = input("Please Insert the expense amount: ") 
-         date = input("Please Insert the date of expense(YYYY-MM-DD): ")
-         note = input("Expense Note: ")
+         while True:
+            category = input("Please Insert the expense category: ").strip()
+            #making sure category is not empty 
+            if category:
+                break
+            print("Category can not be empty")
+            
+            
+         while True:
+            amount_input = input("Please Insert the expense amount: $")
+            #adding input validation to make sure amount is a number/float 
+            try:
+                amount = float(amount_input)
+                break
+            except ValueError:
+                print("Please enter a valid number")
+                
+             
+         while True: 
+            date = input("Please Insert the date of expense(YYYY-MM-DD): ")
+            #adding input validation to make sure the date is in the right format 
+            if re.match(r"\d{4}-\d{2}-\d{2}", date):
+                break
+            else:
+                print("Please enter a valid date (YYYY-MM-DD)")
+                
+                
+         while True:
+            note = input("Expense Note: ").strip()
+            #making sure note is not empty
+            if note:
+                break
+            print("Note can not be empty")
+            
          
          #Storing as a dictionary 
          expense = {
@@ -21,8 +52,9 @@ def expenses_board():
              "Note: " : note     
          }
          
+         
          expenses.append(expense) #adding dictionaries (expenses) to a list 
-         answer = input("Is this the last expense? (yes/no): ").lower() 
+         answer = input("Is this the last expense? (yes/no): ").strip().lower() 
          if answer == "yes" : 
              break 
          
