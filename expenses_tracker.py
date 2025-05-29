@@ -1,6 +1,35 @@
 import re #importing regular expressions module 
+import json #importing module to work with json files in data handling 
 
 #Defining Functions 
+
+
+#Function to save data as a json file 
+def save_expenses(expenses, filename="expenses.json"):
+    try:
+        with open(filename, "w") as file:
+            json.dump(expenses,file,indent=4)
+        print(f"✅ Expenses saved to {filename}")
+    except:
+        print(f"❌ Error saving expenses")
+        
+        
+        
+#Function to load date from json file 
+def load_expenses(filename = "expenses.json"):
+    try: 
+        with open (filename, "r") as file:
+            expenses = json.load(file)
+            print(f"✅ Expenses loaded from {filename}")
+        return expenses
+    except FileNotFoundError:
+        print(f"ℹ️ No saved file found, starting fresh.")
+        return []
+    except json.JSONDecodeError:
+        print("❌ JSON file is corrupted or malformed.")
+        return []
+
+
 
 #creating function that creates the expenses 'board' 
 def expenses_board(): 
@@ -46,10 +75,10 @@ def expenses_board():
          
          #Storing as a dictionary 
          expense = {
-             "categoy" : category,
-             "amount" : amount,
-             "date" : date, 
-             "note" : note     
+             "categoy": category,
+             "amount": amount,
+             "date": date, 
+             "note": note     
          }
          
          
@@ -59,6 +88,8 @@ def expenses_board():
              break 
          
     return expenses 
+
+
 
 #Creating Function to save expenses per month 
 def monthly_expenses(expenses):
@@ -112,7 +143,22 @@ def monthly_expenses(expenses):
     print("=" * 20)
             
         
+        
+        
 #Main Program 
-print("Welcome to Expenses Tracker")
-all_expenses = expenses_board()
+print("📊 Welcome to Expenses Tracker")
+
+#Load existing expenses
+all_expenses = load_expenses()
+
+#Input new expenses
+new_expenses = expenses_board()
+
+#add new expenses the the full list
+all_expenses.extend(new_expenses)
+
+#Save updated list to file
+save_expenses(all_expenses)
+
+#Dispply monthly report 
 monthly_expenses(all_expenses)
