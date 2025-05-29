@@ -75,7 +75,7 @@ def expenses_board():
          
          #Storing as a dictionary 
          expense = {
-             "categoy": category,
+             "category": category,
              "amount": amount,
              "date": date, 
              "note": note     
@@ -160,5 +160,5 @@ all_expenses.extend(new_expenses)
 #Save updated list to file
 save_expenses(all_expenses)
 
-#Dispply monthly report 
+#Display monthly report 
 monthly_expenses(all_expenses)
