@@ -46,10 +46,10 @@ def expenses_board():
          
          #Storing as a dictionary 
          expense = {
-             "Category: " : category,
-             "Amount: " : amount,
-             "Date: " : date, 
-             "Note: " : note     
+             "categoy" : category,
+             "amount" : amount,
+             "date" : date, 
+             "note" : note     
          }
          
          
@@ -72,7 +72,7 @@ def monthly_expenses(expenses):
     
     #accesing needed information with a for loop 
     for g in expenses: 
-        match = re.search(r"\d{4}-(\d{2})-\d{2}", g["Date: "]) #created a regular expression to get the month of the expense from the date
+        match = re.search(r"\d{4}-(\d{2})-\d{2}", g["date"]) #created a regular expression to get the month of the expense from the date
         if match:
             month_number = match.group(1)    #adding the expense to it's month in 
             month = month_names.get(month_number, "Unknown")
@@ -93,7 +93,7 @@ def monthly_expenses(expenses):
         for item in items:
             print(item)
             try:
-                total+= float(item.get("Amount: ", 0))
+                total+= float(item.get("amount", 0))
             except ValueError:
                 pass
         print(f"Total spent in {month} is: ${total:.2f}")
@@ -103,7 +103,7 @@ def monthly_expenses(expenses):
     for items in monthly_groups.values():
         for item in items:
             try:
-                grand_total += float(item.get("Amount: ", 0))
+                grand_total += float(item.get("amount", 0))
             except ValueError:
                 pass
     
