@@ -95,7 +95,7 @@ def monthly_expenses(expenses):
             try:
                 total+= float(item.get("amount", 0))
             except ValueError:
-                pass
+                print("All date must be numbers")
         print(f"Total spent in {month} is: ${total:.2f}")
     
     #Getting Grand Total: 
@@ -105,7 +105,7 @@ def monthly_expenses(expenses):
             try:
                 grand_total += float(item.get("amount", 0))
             except ValueError:
-                pass
+                print("All data must be numbers")
     
     print("\n" + "=" * 20)
     print(f"💰 Grand Total Spent: ${grand_total:.2f}")
